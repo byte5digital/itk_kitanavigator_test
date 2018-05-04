@@ -24,8 +24,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\kinder_base whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\kinder_base whereVorname($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\KitaZuKinder $kita
  */
 class kinder_base extends Model
 {
     protected $fillable = ['vorname', 'nachname', 'strasse', 'ort', 'plz'];
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function kita(){
+    	return $this->hasOne(KitaZuKinder::class, 'kinder_base_id', 'id');
+    }
 }

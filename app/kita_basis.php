@@ -22,10 +22,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\kita_basis wherePostleitzahl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\kita_basis whereStrasse($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\kita_basis whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\KitaZuKinder[] $kinder
  */
 class kita_basis extends Model
 {
     //
 
 	protected $fillable = ['kita_name', 'strasse', 'postleizahl', 'ort'];
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function kinder(){
+		return $this->hasMany(KitaZuKinder::class, 'kinder_base_id');
+	}
 }

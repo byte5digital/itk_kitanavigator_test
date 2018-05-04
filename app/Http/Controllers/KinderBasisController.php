@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\kinder_base;
+use App\kita_basis;
 use Illuminate\Http\Request;
 
 class KinderBasisController extends Controller {
@@ -15,7 +16,9 @@ class KinderBasisController extends Controller {
 	public function getKindById( int $id, Request $request ) {
 		$aktuellesKind = kinder_base::whereId( $id )->first();
 		if ( $aktuellesKind instanceof kinder_base ) {
-			return View( 'kinder.detail_kind', [ 'data' => $aktuellesKind ] );
+			$kitas = kita_basis::all();
+
+			return View( 'kinder.detail_kind', [ 'data' => $aktuellesKind, 'kitas' => $kitas ] );
 		}
 
 		return View( 'welcome' );
@@ -24,11 +27,13 @@ class KinderBasisController extends Controller {
 	public function createKind( Request $request ) {
 		$kind = new kinder_base( $request->input() );
 		$kind->save();
+
 		return self::showListView();
 	}
 
 	protected static function showListView() {
 		$data = kinder_base::all();
+
 		return View( 'kinder.listview_kind', [ 'data' => $data ] );
 	}
 
@@ -39,14 +44,18 @@ class KinderBasisController extends Controller {
 	public function updateKind( Request $request ) {
 		$aktuellesKind = kinder_base::whereId( $request->input( 'id' ) )->first();
 		//$aktuellesKind->update($request->input());
-		$aktuellesKind->vorname = $request->input( 'vorname' );
+		$aktuellesKind->vorname            = $request->input( 'vorname' );
+		$aktuellesKind->kita->kita_base_id = $request->input( 'kita_auswahl' );
+		$aktuellesKind->kita->save();
 		$aktuellesKind->save();
+
 		return self::showListView();
 	}
 
-	public function deleteKind(int $id, Request $request ) {
+	public function deleteKind( int $id, Request $request ) {
 		$aktuellesKind = kinder_base::whereId( $id )->first();
 		$aktuellesKind->delete();
+
 		return self::showListView();
 	}
 }

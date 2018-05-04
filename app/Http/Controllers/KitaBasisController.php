@@ -16,17 +16,17 @@ class KitaBasisController extends Controller {
 	}
 
 	public function showInsertForm(){
-		return View('newKita');
+		return View('kita.new_kita');
 	}
 
 	public function showAllKitas(){
 		$alleKitas = kita_basis::all();
-		return View('listview', ['data' => $alleKitas]);
+		return View('kita.listview_kita', ['data' => $alleKitas]);
 	}
 
 	public function showDetail(int $id, Request $request){
 		$aktuelleKite = kita_basis::whereId($id)->first();
-		return View('detail', ['data'=>$aktuelleKite]);
+		return View('kita.detail_kita', ['data'=>$aktuelleKite]);
 	}
 
 	public function insert(Request $request){

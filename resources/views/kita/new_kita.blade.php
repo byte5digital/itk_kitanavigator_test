@@ -3,8 +3,8 @@
 @section('title', 'Page Title')
 
 @section('content')
-    <form action="{{ action('KitaBasisController@insert') }}" method="post">
-        {{ csrf_field() }}
+    <form action="{{route('kita.post') }}" method="post">
+        @csrf
        <div class="form-group">
            <label for="kita_name">Kita Name</label>
            <input type="text" class="form-control" placeholder="Kita Name" name="kita_name" />

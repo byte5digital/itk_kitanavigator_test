@@ -34,7 +34,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li><a class="nav-link" href="{{route('kita.list')}}">Kita Liste</a></li>
+                        <li><a class="nav-link" href="{{route('kita.create')}}">Kita erstellen</a></li>
+                        <li><a class="nav-link" href="{{route('kind.list')}}">Kind Liste</a></li>
+                        <li><a class="nav-link" href="{{route('kind.create')}}">Kind erstellen</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -74,5 +77,8 @@
 
         </main>
     </div>
+<footer>
+    @yield('footer_scripts')
+</footer>
 </body>
 </html>

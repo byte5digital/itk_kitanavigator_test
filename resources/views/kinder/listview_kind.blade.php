@@ -14,19 +14,19 @@
             Ort
         </div>
     </div>
-	<?php use App\kita_basis; /** @var kita_basis $aktuelleKita */ ?>
-    @foreach($data as $aktuelleKita)
+	<?php use App\kinder_base; /** @var kinder_base $aktuellesKind */ ?>
+    @foreach($data as $aktuellesKind)
         <div class="row">
             <div class="col-4">
-                <a href="{{route('showdetail',['id' => $aktuelleKita->id], true)}}">
-                    {{$aktuelleKita->kita_name}}
+                <a href="{{route('kind.details',['id' => $aktuellesKind->id], true)}}">
+                    {{$aktuellesKind->vorname}} {{$aktuellesKind->nachname}}
                 </a>
             </div>
             <div class="col-4">
-                {{$aktuelleKita->strasse}}
+                {{$aktuellesKind->strasse}}
             </div>
             <div class="col-4">
-                {{$aktuelleKita->postleitzahl}} {{$aktuelleKita->ort}}
+                {{$aktuellesKind->plz}} {{$aktuellesKind->ort}}
             </div>
         </div>
     @endforeach

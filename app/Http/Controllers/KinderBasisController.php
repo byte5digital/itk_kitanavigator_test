@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\kinder_base;
 use App\kita_basis;
+use App\KitaZuKinder;
 use Illuminate\Http\Request;
 
 class KinderBasisController extends Controller {
@@ -43,10 +44,15 @@ class KinderBasisController extends Controller {
 
 	public function updateKind( Request $request ) {
 		$aktuellesKind = kinder_base::whereId( $request->input( 'id' ) )->first();
-		//$aktuellesKind->update($request->input());
+		$aktuellesKind->update($request->input());
 		$aktuellesKind->vorname            = $request->input( 'vorname' );
-		$aktuellesKind->kita->kita_base_id = $request->input( 'kita_auswahl' );
-		$aktuellesKind->kita->save();
+
+		$aktuelleZuordnung = $aktuellesKind->kita != null ? $aktuellesKind->kita : new KitaZuKinder();
+
+		$aktuelleZuordnung->kinder_base_id = $aktuellesKind->id;
+		$aktuelleZuordnung->kita_base_id = $request->input( 'kita_auswahl' );
+		$aktuelleZuordnung->save();
+
 		$aktuellesKind->save();
 
 		return self::showListView();

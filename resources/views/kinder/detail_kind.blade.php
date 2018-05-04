@@ -34,10 +34,10 @@
         <div class="form-group">
             <label for="kita_auswahl">Kita Auswahl</label>
             <select name="kita_auswahl" id="kita_auswahl" class="form-control">
-                <option value="" {{$data->has('kita') ? '' : 'selected'}}disabled >Kita auswählen</option>
+                <option value="" {{$data->kita != null ? '' : 'selected'}}disabled >Kita auswählen</option>
 		        <?php use App\kita_basis; /** @var kita_basis $kita */ ?>
                 @foreach ($kitas as $kita)
-                    <option {{$data->has('kita') && $data->kita->kita_base_id == $kita->id ? 'selected' : ''}} value="{{$kita->id}}">{{$kita->kita_name}}</option>
+                    <option {{$data->kita != null && $data->kita->kita_base_id == $kita->id ? 'selected' : ''}} value="{{$kita->id}}">{{$kita->kita_name}}</option>
                 @endforeach
             </select>
         </div>
